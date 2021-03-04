@@ -15,7 +15,7 @@ while True :
         
         
       tim = '"timestamp":"'+datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')+'"'
-      time_setting = '"' + "Time_setting" + '"' + ":" + '"' + str(v_raw) + '"'
+      time_setting = '"' + "Time_setting" + '"' + ":" + '"' + str(uv_raw) + '"'
       uv = '"' + "UV[W/(m*m)]" + '"' + ":" + '"' + str(round(uv,5)) + '"'
       mylist = [tim,time_setting,uv]
       mystr = '{' + ','.join(map(str,mylist))+'}'
