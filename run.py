@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from datetime import datetime
 import veml6070
 
 ALL_INTEGRATION_TIMES = [
@@ -12,4 +12,11 @@ while True :
       veml.set_integration_time(i)
       uv_raw = veml.get_uva_light_intensity_raw()
       uv = veml.get_uva_light_intensity()
-      print("Integration Time setting %d: %f W/(m*m) from raw value %d" % (i, uv, uv_raw))
+        
+        
+      tim = '"timestamp":"'+datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')+'"'
+      time_setting = '"' + "Time_setting" + '"' + ":" + '"' + str(v_raw) + '"'
+      uv = '"' + "UV[W/(m*m)]" + '"' + ":" + '"' + str(round(uv,5)) + '"'
+      mylist = [tim,time_setting,uv]
+      mystr = '{' + ','.join(map(str,mylist))+'}'
+      print(mystr)  
