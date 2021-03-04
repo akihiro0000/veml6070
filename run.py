@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 from datetime import datetime
 import veml6070
+import paho.mqtt.client as mqtt
 
 ALL_INTEGRATION_TIMES = [
     veml6070.INTEGRATIONTIME_1_2T, veml6070.INTEGRATIONTIME_1T, veml6070.INTEGRATIONTIME_2T, veml6070.INTEGRATIONTIME_4T
 ]
+
+mqtt_client = mqtt.Client()
+mqtt_client.connect("fluent-bit",1883, 60)
 
 veml = veml6070.Veml6070()
 while True :
@@ -20,3 +24,7 @@ while True :
       mylist = [tim,time_setting,uv]
       mystr = '{' + ','.join(map(str,mylist))+'}'
       print(mystr)  
+      mqtt_client.publish("{}/{}".format("/demo",'person_count'), mystr)
+    
+   
+mqtt_client.disconnect()
